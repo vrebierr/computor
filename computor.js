@@ -48,6 +48,9 @@ if (result.value != 0) {
   }
 }
 
+console.log(values);
+console.log(result);
+
 function highestDegree(array) {
   var flag = 0;
 
@@ -64,23 +67,39 @@ var poly = highestDegree(values);
 
 console.log('Polynomial degree: ' + poly);
 
+var a = 0;
+var b = 0;
+var c = 0;
+
+values.map(function (item) {
+  if (item.degree == 2) {
+    a = item.value;
+  }
+  else if (item.degree == 1) {
+    b = item.value;
+  }
+  else {
+    c = item.value;
+  }
+});
+
 if (poly > 2) {
   console.log('The polynomial degree is stricly greater than 2, I can\'t solve.');
   return 1;
 }
 else if (poly == 2) {
-  var delta = (values[1].value * values[1].value) - (4 * values[0].value * values[2].value);
+  var delta = (b * b) - (4 * a * c);
 
   if (delta > 0) {
-    var x1 = (-values[1].value - Math.sqrt(delta)) / (2 * values[0].value);
-    var x2 = (-values[1].value + Math.sqrt(delta)) / (2 * values[0].value);
+    var x1 = (-b - Math.sqrt(delta)) / (2 * a);
+    var x2 = (-b + Math.sqrt(delta)) / (2 * a);
 
     console.log('Discriminant is strictly positive, the two solutions are:');
     console.log(x1);
     console.log(x2);
   }
   else if (delta === 0) {
-    var result = -values[1].value / (2 * values[0].value);
+    var result = -b / (2 * a);
 
     console.log('The solution is:');
     console.log(result);
@@ -90,7 +109,7 @@ else if (poly == 2) {
   }
 }
 else {
-  var result = -values[0].value / values[1].value;
+  var result = -c / b;
 
   console.log('The solution is:');
   console.log(result);
